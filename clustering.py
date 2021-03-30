@@ -5,13 +5,12 @@ import matplotlib.pyplot as plt
 
 def main():
     df = pd.read_csv("iris.csv")
-
-    del df['flower']
-    del df['petal_length']
-
     print(df)
 
-    kmeans = KMeans(3, df)
+    clean_df = df.drop(['flower', 'petal_width'], axis=1)
+    print(clean_df)
+
+    kmeans = KMeans(3, clean_df)
 
     centroids, predictions = kmeans.fit()
 
@@ -25,8 +24,10 @@ def main():
     ax.set_xlabel('sepal_length')
     ax.set_ylabel('sepal_width')
     
-
+    plt.savefig("segmentation.png")
     plt.show()
+
+
 
 if __name__ == '__main__':
     main()
